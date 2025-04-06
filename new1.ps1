@@ -4,9 +4,10 @@ $steps = 20            # Total steps in the bar
 $interval = $loadingTime / $steps
 
 Write-Host "`n[INFO] Initializing MultiTool..." -ForegroundColor Cyan
+
 for ($i = 1; $i -le $steps; $i++) {
     $percent = [math]::Round(($i / $steps) * 100)
-    
+
     # Use simple ASCII characters for wide compatibility
     $filled = '=' * $i
     $empty = ' ' * ($steps - $i)
@@ -15,6 +16,7 @@ for ($i = 1; $i -le $steps; $i++) {
     Write-Host -NoNewline "`r[$bar] $percent%" 
     Start-Sleep -Milliseconds ($interval * 1000)
 }
+
 Write-Host "`n[INFO] Loading Complete!`n" -ForegroundColor Green
 
 # --- Download the Batch Tool ---
