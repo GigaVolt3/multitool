@@ -7,13 +7,18 @@ Write-Host "`n[INFO] Initializing MultiTool..." -ForegroundColor Cyan
 
 for ($i = 1; $i -le $steps; $i++) {
     $percent = [math]::Round(($i / $steps) * 100)
+    
+    # Progress bar using only safe ASCII characters
+    $bar = ""
+    for ($j = 1; $j -le $steps; $j++) {
+        if ($j -le $i) {
+            $bar += "="
+        } else {
+            $bar += " "
+        }
+    }
 
-    # Use simple ASCII characters for wide compatibility
-    $filled = '=' * $i
-    $empty = ' ' * ($steps - $i)
-    $bar = "$filled$empty"
-
-    Write-Host -NoNewline "`r[$bar] $percent%" 
+    Write-Host -NoNewline "`r[$bar] $percent%"
     Start-Sleep -Milliseconds ($interval * 1000)
 }
 
